@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-// import update from 'react-addons-update';
 
 class App extends Component {
   constructor(){
@@ -43,15 +42,11 @@ class App extends Component {
 
   onDelete(index){
     var data = this.state.list
-    // var newData = update(data, {
-    //     $splice: [[index, 1]]
-    // });
 		let newData = data.slice(0,index).concat(data.slice(index+1))
     this.setState({list:newData})
   }
 
   render() {
-		console.log(this.state);
     return (
       <div>
         <h1>The n^n-th Todo List</h1>
