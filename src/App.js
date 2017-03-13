@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import update from 'react-addons-update';
 
 class App extends Component {
   constructor(){
@@ -20,7 +19,7 @@ class App extends Component {
   handleSubmit(e){
     e.preventDefault()
     let list = this.state.list.slice()
-    list.push({desc:this.state.text,done:0}) 
+    list.push({desc:this.state.text,done:0})
     this.setState({
       list: list,
       text: ''
@@ -30,10 +29,7 @@ class App extends Component {
   isDone(index){
     var data = this.state.list
     var taskStatus = data[index].done
-    var updatedTask = update(data[index], {done: {$set: !taskStatus}})
-    var newData = update(data, {
-        $splice: [[index, 1, updatedTask]]
-    });
+		let newData = data.slice(0, index).concat([{...data[index], done:!taskStatus}]).concat(data.slice(index+1))
     this.setState({list:newData})
   }
 
@@ -46,9 +42,7 @@ class App extends Component {
 
   onDelete(index){
     var data = this.state.list
-    var newData = update(data, {
-        $splice: [[index, 1]]
-    });
+		let newData = data.slice(0,index).concat(data.slice(index+1))
     this.setState({list:newData})
   }
 
